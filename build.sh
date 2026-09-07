@@ -52,7 +52,7 @@ build_gphotos() {
   python3 - <<'PYEOF'
 import json
 data = json.load(open("gp-options.json"))
-SUBSET = {"Spoof features", "GmsCore support"}   # LITE subset
+SUBSET = {"Spoof features", "GmsCore support", "Fix selected account persistence"}
 for e in data:
     for name, p in e.get("patches", {}).items():
         p["enabled"] = name in SUBSET
@@ -70,7 +70,7 @@ PYEOF
   GP_VER_SHORT=$(echo "$GP_VER" | cut -d. -f1-3)
   echo "GP base versionName=$GP_VER (short $GP_VER_SHORT)"
   [ -z "$GP_VER" ] && { echo "aapt2 failed on gp-base.apk"; return 1; }
-  GP_OUT="out/Google_Photos_Lite-v${GP_VER_SHORT}-patches-${GP_MPP_TAG}.apk"
+  GP_OUT="out/Google_Photos-v${GP_VER_SHORT}-patches-${GP_MPP_TAG}.apk"
   java -Xms512m -Xmx3g -jar morphe-desktop.jar patch --patches gp-patches.mpp gp-base.apk -o "$GP_OUT" --options-file gp-options.json "${KS_ARGS[@]}"
   echo "GP applied patches:"
   grep -c "^INFO: Applied" "$GP_OUT.log" 2>/dev/null || true
