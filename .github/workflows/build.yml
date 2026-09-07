@@ -64,7 +64,7 @@ jobs:
           set -e
           for f in out/*.apk; do
             case "$(basename "$f")" in
-              Google_Photos_*)     DIR="GPhotos" ;;
+              Google_Photos-*)     DIR="GPhotos" ;;
               YouTube_Music-*exp*) DIR="YTM/Experimental" ;;
               YouTube_Music-*)     DIR="YTM/Stable" ;;
               YouTube-*exp*)       DIR="YT/Experimental" ;;
