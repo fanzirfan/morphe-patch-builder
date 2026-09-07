@@ -52,7 +52,7 @@ build_gphotos() {
   python3 - <<'PYEOF'
 import json
 data = json.load(open("gp-options.json"))
-SUBSET = {"Spoof features", "GmsCore support", "Fix selected account persistence"}
+SUBSET = {"Spoof features", "GmsCore support", "Fix selected account persistence", "Change package name"}
 for e in data:
     for name, p in e.get("patches", {}).items():
         p["enabled"] = name in SUBSET
