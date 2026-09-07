@@ -45,9 +45,9 @@ jobs:
           curl -sL -o patches.mpp "$MPP_URL"
           MPP_TAG=$(curl -s https://api.github.com/repos/MorpheApp/morphe-patches/releases/latest | grep -o '"tag_name": *"[^"]*"' | cut -d'"' -f4)
           echo "MPP_TAG=$MPP_TAG" >> $GITHUB_ENV
-          AAPT2_URL=$(curl -s https://api.github.com/repos/j-hc/revanced-magisk-module/contents/bin/aapt2/aapt2-arm64 2>/dev/null | grep download_url | cut -d'"' -f4)
-          # aapt2 x86_64 binary for runner:
-          curl -sL -o aapt2 https://github.com/j-hc/revanced-magisk-module/raw/main/bin/aapt2/aapt2-x86_64 2>/dev/null || curl -sL -o aapt2 https://dl.xuded.com/revanced/aapt2
+          # aapt2 x86_64 from official Android SDK build-tools
+          curl -sL -o bt.zip https://dl.google.com/android/repository/build-tools_r34-linux.zip
+          unzip -o -j bt.zip '*/aapt2' -d . 
           chmod +x aapt2 morphe-desktop.jar
 
       - name: Patch YT + YTM
